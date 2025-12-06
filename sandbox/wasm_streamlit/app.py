@@ -55,9 +55,14 @@ if st.button("Calculate Sub"):
     except Exception as e:
         st.error(f"Error executing WASM: {e}")
 
-st.markdown("---")
-st.markdown("### How it works")
-st.markdown("1. Rust code is compiled to WASM")
-st.markdown("2. Python uses `wasmtime` to load the WASM module")
-st.markdown("3. Streamlit inputs are passed to the WASM function")
-st.markdown("4. Result is returned and displayed")
+
+st.markdown('''
+---
+### How it works
+
+1. Rust code is compiled to WASM
+2. Python uses `wasmtime` to load the WASM module
+3. Streamlit inputs are passed to the WASM function
+4. Result is returned and displayed
+
+''')
