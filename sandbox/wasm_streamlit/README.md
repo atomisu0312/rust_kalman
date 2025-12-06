@@ -6,6 +6,7 @@ This project demonstrates how to call a Rust-compiled WASM function from a Strea
 
 - Rust (with `wasm32-unknown-unknown` target)
 - `uv` (for Python dependency management)
+- 参考となる記事：https://zenn.dev/chikoski/articles/cad50230beb4ca
 
 ## Setup & Run
 
