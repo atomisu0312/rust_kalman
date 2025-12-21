@@ -1,0 +1,76 @@
+   Compiling struct_demo v0.1.0 (/Users/shoheiyamashita/myprj/signal-practice/rust_kalman/sandbox/rust_component_py/rust/struct_demo)
+error: failed to resolve directory while parsing WIT for path [/Users/shoheiyamashita/myprj/signal-practice/rust_kalman/sandbox/rust_component_py/rust/struct_demo/wit]
+       
+       Caused by:
+         failed to parse package: /Users/shoheiyamashita/myprj/signal-practice/rust_kalman/sandbox/rust_component_py/rust/struct_demo/wit
+       
+       Caused by:
+         invalid character in identifier '_'
+            --> /Users/shoheiyamashita/myprj/signal-practice/rust_kalman/sandbox/rust_component_py/rust/struct_demo/wit/world.wit:15:12
+             |
+          15 |     export add_points: func(p1: point, p2: point) -> point;
+             |            ^
+ --> src/lib.rs:1:1
+  |
+1 | wit_bindgen::generate!("structs");
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: this error originates in the macro `wit_bindgen::generate` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error: cannot find macro `export` in this scope
+  --> src/lib.rs:24:1
+   |
+24 | export!(Component);
+   | ^^^^^^
+
+error[E0405]: cannot find trait `Guest` in this scope
+ --> src/lib.rs:5:6
+  |
+5 | impl Guest for Component {
+  |      ^^^^^ not found in this scope
+
+error[E0412]: cannot find type `Point` in this scope
+ --> src/lib.rs:6:21
+  |
+6 |     fn distance(p1: Point, p2: Point) -> f64 {
+  |                     ^^^^^ not found in this scope
+
+error[E0412]: cannot find type `Point` in this scope
+ --> src/lib.rs:6:32
+  |
+6 |     fn distance(p1: Point, p2: Point) -> f64 {
+  |                                ^^^^^ not found in this scope
+
+error[E0412]: cannot find type `Point` in this scope
+  --> src/lib.rs:12:23
+   |
+12 |     fn add_points(p1: Point, p2: Point) -> Point {
+   |                       ^^^^^ not found in this scope
+
+error[E0412]: cannot find type `Point` in this scope
+  --> src/lib.rs:12:34
+   |
+12 |     fn add_points(p1: Point, p2: Point) -> Point {
+   |                                  ^^^^^ not found in this scope
+
+error[E0412]: cannot find type `Point` in this scope
+  --> src/lib.rs:12:44
+   |
+12 |     fn add_points(p1: Point, p2: Point) -> Point {
+   |                                            ^^^^^ not found in this scope
+
+error[E0422]: cannot find struct, variant or union type `Point` in this scope
+  --> src/lib.rs:13:9
+   |
+13 |         Point {
+   |         ^^^^^ not found in this scope
+
+error[E0412]: cannot find type `Person` in this scope
+  --> src/lib.rs:19:17
+   |
+19 |     fn greet(p: Person) -> String {
+   |                 ^^^^^^ not found in this scope
+
+Some errors have detailed explanations: E0405, E0412, E0422.
+For more information about an error, try `rustc --explain E0405`.
+error: could not compile `struct_demo` (lib) due to 10 previous errors

@@ -1,0 +1,6 @@
+package docs:adder@0.1.0;
+
+world adder {
+    export add: func(x: s32, y: s32) -> s32;
+    export multiply: func(x: s32, y: s32) -> s32;
+}

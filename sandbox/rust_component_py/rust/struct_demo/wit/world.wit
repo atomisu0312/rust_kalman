@@ -1,0 +1,17 @@
+package docs:structs@0.1.0;
+
+world structs {
+    record point {
+        x: s32,
+        y: s32,
+    }
+
+    record person {
+        name: string,
+        age: u8,
+    }
+
+    export distance: func(p1: point, p2: point) -> f64;
+    export add-points: func(p1: point, p2: point) -> point;
+    export greet: func(p: person) -> string;
+}
