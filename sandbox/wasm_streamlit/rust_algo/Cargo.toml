@@ -7,3 +7,6 @@ edition = "2021"
 crate-type = ["cdylib"]
 
 [dependencies]
+ndarray = "0.15"
+ndarray-inverse = "0.1"
+lazy_static = "1.4" # For managing the static buffer
