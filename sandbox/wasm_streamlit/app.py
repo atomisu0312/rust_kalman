@@ -56,11 +56,41 @@ if st.button("Calculate Sub"):
         st.error(f"Error executing WASM: {e}")
 
 
+
+st.markdown("---")
+st.header("Matrix Operations Demo (ndarray)")
+
+if st.button("Run Matrix Demo"):
+    try:
+        instance, store = load_wasm()
+        if instance:
+            # Get exports
+            run_demo = instance.exports(store)["run_demo"]
+            get_output_ptr = instance.exports(store)["get_output_ptr"]
+            memory = instance.exports(store)["memory"]
+            
+            # Run the demo to perform calculations and populate buffer
+            length = run_demo(store)
+            
+            # Get pointer to the buffer
+            ptr = get_output_ptr(store)
+            
+            # Read from WASM memory
+            # Use read(store, offset, end_offset) to get bytes
+            # Note: ptr returned from Rust is an offset in WASM linear memory
+            output_bytes = memory.read(store, ptr, ptr + length)
+            output_str = output_bytes.decode('utf-8')
+            
+            st.text(output_str)
+            
+    except Exception as e:
+        st.error(f"Error executing WASM Demo: {e}")
+
 st.markdown('''
 ---
 ### How it works
 
-1. Rust code is compiled to WASM
+1. Rust code is compiled to :red[WASM]
 2. Python uses `wasmtime` to load the WASM module
 3. Streamlit inputs are passed to the WASM function
 4. Result is returned and displayed
