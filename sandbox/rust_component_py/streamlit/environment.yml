@@ -1,0 +1,10 @@
+name: sf_env
+channels:
+  - conda-forge
+dependencies:
+  - python>=3.13
+  - streamlit>=1.52.2
+  - pip
+  - pip:
+    - wasmtime>=39.0.0
+

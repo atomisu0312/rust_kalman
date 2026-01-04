@@ -1,5 +1,6 @@
 import streamlit as st
 import os
+from types import SimpleNamespace
 from wasmtime import Config, Engine, Store
 from wasmtime.component import Component, Linker
 
@@ -37,7 +38,11 @@ def run_wasm_func(wasm_path, func_name, *args):
         func = instance.get_func(store, func_name)
         
         if func:
-            return func(store, *args)
+            result = func(store, *args)
+            # 戻り値が辞書の場合はSimpleNamespaceに変換（wasmtimeのコンポーネントモデルはレコードを辞書として返す）
+            if isinstance(result, dict):
+                return SimpleNamespace(**result)
+            return result
         else:
             raise Exception(f"Function '{func_name}' not found")
             
