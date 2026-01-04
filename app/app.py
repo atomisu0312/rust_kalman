@@ -1,42 +1,30 @@
 import streamlit as st
-import streamlit.components.v1 as components
+from tabs import render_input_tab, render_confirmation_tab
+from util import handle_dimension_change
 
-# bootstrap 4 collapse example
-components.html(
-    """
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <div id="accordion">
-      <div class="card">
-        <div class="card-header" id="headingOne">
-          <h5 class="mb-0">
-            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-            Collapsible Group Item #1
-            </button>
-          </h5>
-        </div>
-        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-          <div class="card-body">
-            Collapsible Group Item #1 content
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header" id="headingTwo">
-          <h5 class="mb-0">
-            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-            Collapsible Group Item #2
-            </button>
-          </h5>
-        </div>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-          <div class="card-body">
-            Collapsible Group Item #2 content
-          </div>
-        </div>
-      </div>
-    </div>
-    """,
-    height=600,
+st.set_page_config(page_title="カルマンフィルタ パラメータ設定", layout="wide")
+
+st.title("カルマンフィルタ 内部状態次元数設定")
+
+# 次元の選択（1〜5）
+dimension = st.selectbox(
+    "状態次元数",
+    options=[1, 2, 3, 4, 5],
+    index=1,  # デフォルトは2次元
+    help="カルマンフィルタの状態ベクトルの次元数を選択してください"
 )
+
+# 観測次元は1で固定
+obs_dimension = 1
+
+# 次元が変更された場合、古い値をクリア
+handle_dimension_change(dimension, obs_dimension)
+
+# タブで入力と確認を分ける
+tab1, tab2 = st.tabs(["📝 パラメータ入力", "✅ パラメータ確認"])
+
+with tab1:
+    render_input_tab(dimension, obs_dimension)
+
+with tab2:
+    render_confirmation_tab(dimension, obs_dimension)
